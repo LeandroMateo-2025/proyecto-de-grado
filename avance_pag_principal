@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sublimación Victoria - Sublimación Personalizada</title>
+<meta name="description" content="Especialistas en sublimación para tejidos, tazas, portátiles y regalos personalizados. Alta calidad en Sublimación Victoria.">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* General */
+body { font-family: 'Arial', sans-serif; margin:0; }
+
+/* Hero slider */
+#hero { position: relative; height: 100vh; overflow: hidden; }
+#hero .slide {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity 1s ease-in-out;
+}
+#hero .slide.active { opacity:1; }
+#hero .overlay { position:absolute; inset:0; background:rgba(0,0,0,0.4); }
+
+/* Hero text */
+.hero-text { position:relative; z-index:10; color:white; text-align:center; }
+.hero-text h1 { font-size:3rem; font-weight:bold; margin-bottom:1rem; }
+.hero-text p { font-size:1.25rem; margin-bottom:2rem; }
+.hero-text a { padding:0.75rem 2rem; border-radius:9999px; font-weight:600; }
+
+/* Hero indicators */
+.slider-dots { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; gap:0.5rem; z-index:10; }
+.slider-dots span { width:12px; height:12px; border-radius:50%; background:white; opacity:0.5; cursor:pointer; transition:opacity 0.3s; }
+.slider-dots span.active { opacity:1; }
+
+/* Floating arrow */
+.floating-btn { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); animation:bounce 2s infinite; z-index:10; }
+@keyframes bounce { 0%,20%,50%,80%,100% { transform:translateY(0); } 40%{transform:translateY(-10px);} 60%{transform:translateY(-5px);} }
+
+/* Cards services */
+.service-card { transition:all 0.3s ease; border-radius:1rem; box-shadow:0 10px 20px rgba(0,0,0,0.1); }
+.service-card:hover { transform:translateY(-5px); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+
+/* Footer */
+footer a { color:white; margin:0 0.5rem; transition:color 0.3s; }
+footer a:hover { color:#4ecdc4; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+        <!-- Logo + Nombre -->
+        <div class="flex items-center space-x-4">
+            <img src="{{ asset('imagenes/logo-sublimaciones-victoria-negro.png') }}" 
+                 alt="Logo" class="h-20 w-auto transition-transform duration-300 hover:scale-105">
+            <div class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-cyan-400">
+                Sublimación Victoria
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <nav class="hidden md:flex space-x-4">
+            @if(Route::has('login'))
+                @auth
+                    <span class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">Bienvenido, {{ auth()->user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline-block">@csrf
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Cerrar Sesión</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Login</a>
+                    @if(Route::has('register'))
+                        <a href="{{ route('register') }}" class="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition">Registrarse</a>
+                    @endif
+                @endauth
+            @endif
+        </nav>
+    </div>
+</header>
+
+
+
+<!-- Hero -->
+<section id="hero">
+    <div class="slide active" style="background-image:url('/imagenes/foto4.jpg');"></div>
+    <div class="slide" style="background-image:url('/imagenes/foto5.jpg');"></div>
+    <div class="slide" style="background-image:url('/imagenes/foto6.jpg');"></div>
+    <div class="overlay"></div>
+    <div class="hero-text flex flex-col justify-center items-center h-full">
+        <h1>Sublimación de Alta Calidad</h1>
+        <p>Convierte tus ideas en productos únicos: camisetas, mugs y accesorios personalizados.</p>
+        <a href="#servicios" class="bg-white text-blue-600 hover:bg-gray-100">Ver Servicios</a>
+    </div>
+    <!-- Dots -->
+    <div class="slider-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+    </div>
+    <!-- Arrow -->
+    <div class="floating-btn">
+        <a href="#acerca" class="text-white">
+            <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- About -->
+<!-- About -->
+<section id="acerca" class="py-20 bg-white text-center relative">
+    <div class="max-w-4xl mx-auto px-4">
+        <!-- Título decorativo -->
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-wide text-gradient">
+            Acerca de Sublimación Victoria
+        </h2>
+        <!-- Línea decorativa -->
+        <div class="w-32 h-1 bg-gradient-to-r from-pink-500 to-cyan-400 mx-auto mb-6 rounded-full"></div>
+        <p class="text-gray-600 text-lg md:text-xl">
+            Más de 10 años ofreciendo sublimación profesional para personalizar productos con calidad y estilo.
+        </p>
+    </div>
+</section>
+
+<!-- CSS adicional para el título decorativo -->
+<style>
+.text-gradient {
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+</style>
+
+
+<!-- Services -->
+<section id="servicios" class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Nuestros Servicios</h2>
+            <p class="text-gray-600">Opciones para dar vida a tus diseños.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="service-card bg-white p-6 text-center">
+                <img src="/imagenes/foto1.jpg" class="mx-auto mb-4 w-48 h-48 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Sublimación en Tejidos</h3>
+                <p class="text-gray-600">Camisetas, sudaderas y más con diseños personalizados.</p>
+            </div>
+            <div class="service-card bg-white p-6 text-center">
+                <img src="/imagenes/foto2.jpg" class="mx-auto mb-4 w-48 h-48 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Sublimación en Mugs y Tazas</h3>
+                <p class="text-gray-600">Regalos ideales para eventos o uso diario.</p>
+            </div>
+            <div class="service-card bg-white p-6 text-center">
+                <img src="/imagenes/foto3.jpg" class="mx-auto mb-4 w-48 h-48 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Otros Productos</h3>
+                <p class="text-gray-600">Portátiles, cojines, tapices y más.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contacto" class="py-20 bg-white">
+    <div class="max-w-2xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-6">Contáctanos</h2>
+        <form class="bg-gray-50 p-8 rounded-lg shadow-md space-y-4">
+            <input type="text" placeholder="Nombre" class="w-full px-4 py-2 border rounded-lg">
+            <input type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg">
+            <textarea placeholder="Mensaje" rows="5" class="w-full px-4 py-2 border rounded-lg"></textarea>
+            <button class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition">Enviar</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8 text-center">
+    <p>© 2023 Sublimación Victoria. Todos los derechos reservados.</p>
+</footer>
+
+<!-- JS Hero slider -->
+<script>
+const slides = document.querySelectorAll('#hero .slide');
+const dots = document.querySelectorAll('.slider-dots span');
+let current = 0;
+function nextSlide() {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (current+1) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+}
+setInterval(nextSlide, 2500);
+dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = i;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
